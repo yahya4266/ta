@@ -21,3 +21,658 @@
   </main>
 </body>
 </html>
+:root {
+--co2-gradient-start: #3b82f6;
+--co2-gradient-end: #1d4ed8;
+--hcl-gradient-start: #10b981;
+--hcl-gradient-end: #047857;
+--naoh-gradient-start: #f59e0b;
+--naoh-gradient-end: #d97706;
+}
+body {
+font-family: 'Tajawal', sans-serif;
+background-color: #f8fafc;
+touch-action: manipulation;
+}
+.tab-active {
+color: white;
+background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+}
+.co2-tab.tab-active {
+background: linear-gradient(135deg, var(--co2-gradient-start), var(--co2-gradient-end));
+.hcl-tab.tab-active {
+background: linear-gradient(135deg, var(--hcl-gradient-start), var(--hcl-gradient-end));
+}
+}
+.naoh-tab.tab-active {
+background: linear-gradient(135deg, var(--naoh-gradient-start), var(--naoh-gradient-end));
+.tank-container {
+position: relative;
+overflow: hidden;
+border-radius: 12px;
+box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+background: linear-gradient(to bottom, #f0f9ff 0%, #e1f5fe 100%);
+}
+.co2-tank .tank-level {
+background: linear-gradient(to top, var(--co2-gradient-end) 0%, var(--co2-gradient-start) 100%);
+}
+.hcl-tank .tank-level {
+background: linear-gradient(to top, var(--hcl-gradient-end) 0%, var(--hcl-gradient-start) 100%);
+}
+.naoh-tank .tank-level {
+background: linear-gradient(to top, var(--naoh-gradient-end) 0%, var(--naoh-gradient-start)
+100%);
+}
+.tank-level {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+transition: height 0.5s ease-in-out;
+}
+.tank-bubble {
+position: absolute;
+background-color: rgba(255, 255, 255, 0.4);
+border-radius: 50%;
+animation: bubble 3s infinite ease-in-out;
+}
+@keyframes bubble {
+0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+50% { transform: translateY(-15px) scale(1.1); opacity: 0.3; }
+}
+input[type="range"] {
+-webkit-appearance: none;
+height: 8px;
+border-radius: 5px;
+background: #d1d5db;
+outline: none;
+}
+}
+}
+}
+.co2-range::-webkit-slider-thumb {
+background: var(--co2-gradient-start);
+.hcl-range::-webkit-slider-thumb {
+background: var(--hcl-gradient-start);
+.naoh-range::-webkit-slider-thumb {
+background: var(--naoh-gradient-start);
+input[type="range"]::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+cursor: pointer;
+box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.card {
+transition: al 0.3s ease;
+border-radius: 16px;
+overflow: hidden;
+}
+.card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+.card-header {
+padding: 12px 16px;
+color: white;
+font-weight: bold;
+border-top-left-radius: 16px;
+border-top-right-radius: 16px;
+}
+}
+}
+}
+.co2-header {
+background: linear-gradient(135deg, var(--co2-gradient-start), var(--co2-gradient-end));
+.hcl-header {
+background: linear-gradient(135deg, var(--hcl-gradient-start), var(--hcl-gradient-end));
+.naoh-header {
+background: linear-gradient(135deg, var(--naoh-gradient-start), var(--naoh-gradient-end));
+.info-box {
+border-radius: 8px;
+padding: 8px;
+font-size: 0.875rem;
+}
+.co2-info {
+background-color: rgba(59, 130, 246, 0.1);
+border: 1px solid rgba(59, 130, 246, 0.2);
+}
+.hcl-info {
+background-color: rgba(16, 185, 129, 0.1);
+border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.naoh-info {
+background-color: rgba(245, 158, 11, 0.1);
+border: 1px solid rgba(245, 158, 11, 0.2);
+}
+</style>
+>-- محتوى الصفحات --!<
+<div class="p-4">
+>-- CO2 صفحة --!<
+<div id="co2-tab" class="tab-content">
+<h2 class="text-xl font-bold text-center mb-4 text-blue-700">CO2</h2>
+الكثافة: 1.25 | m³ سعة الوحدة: 35>"p class="text-sm text-gray-600 mb-4 text-center<
+tons/m³</p>
+<div class="grid grid-cols-2 gap-3 mb-6">
+>-- الوحدة اﻷوﱃ --!<
+<div class="card bg-white shadow-md">
+<div class="card-header co2-header">CO2 - 1</div>
+<div class="p-3">
+<div class="tank-container co2-tank h-32 mb-3">
+<div class="tank-level" style="height: 50%;" id="co2-tank1-level"></div>
+<div class="tank-bubble" style="width: 10px; height: 10px; left: 20%; bottom: 30%;">
+</div>
+<div class="tank-bubble" style="width: 8px; height: 8px; left: 50%; bottom: 50%;">
+</div>
+<div class="tank-bubble" style="width: 12px; height: 12px; left: 70%; bottom: 20%;">
+</div>
+display">50%</span>
+</div>
+<div class="mb-2">
+<div class="flex justify-between items-center mb-1">
+<label class="text-sm text-gray-600">المستوى</label>
+<span class="text-sm font-bold text-blue-700" id="co2-tank1-percent-
+</div>
+<div class="flex items-center">
+<input type="range" min="0" max="100" value="50" class="flex-grow mr-2 co2-
+range"
+id="co2-tank1-range" data-tank="co2-tank1">
+<input type="number" min="0" max="100" value="50"
+class="w-14 p-1 text-center border border-gray-300 rounded text-sm"
+id="co2-tank1-percent" data-tank="co2-tank1">
+m³</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 text-sm">
+<div class="info-box co2-info">
+<span class="block text-gray-600">الحجم:</span>
+<span class="font-bold text-blue-700" id="co2-tank1-volume">17.50 m³</span>
+</div>
+<div class="info-box co2-info">
+<span class="block text-gray-600">الوزن:</span>
+<span class="font-bold text-blue-700" id="co2-tank1-weight">21.88 tons</span>
+</div>
+</div>
+<div class="mt-2 info-box co2-info">
+<span class="block text-gray-600">90 المطلوب للوصول إﱃ%:</span>
+<div class="flex justify-between">
+<span class="font-bold text-blue-700" id="co2-tank1-required-volume">14.00
+<span class="font-bold text-blue-700" id="co2-tank1-required-weight">17.50
+tons</span>
+</div>
+</div>
+</div>
+</div>
+>-- الوحدة الثانية --!<
+<div class="card bg-white shadow-md">
+<div class="card-header co2-header">CO2 - 2</div>
+<div class="p-3">
+<div class="tank-container co2-tank h-32 mb-3">
+<div class="tank-level" style="height: 50%;" id="co2-tank2-level"></div>
+<div class="tank-bubble" style="width: 10px; height: 10px; left: 30%; bottom: 40%;">
+</div>
+<div class="tank-bubble" style="width: 8px; height: 8px; left: 60%; bottom: 20%;">
+</div>
+<div class="tank-bubble" style="width: 12px; height: 12px; left: 80%; bottom: 60%;">
+</div>
+display">50%</span>
+</div>
+<div class="mb-2">
+<div class="flex justify-between items-center mb-1">
+<label class="text-sm text-gray-600">المستوى</label>
+<span class="text-sm font-bold text-blue-700" id="co2-tank2-percent-
+</div>
+<div class="flex items-center">
+<input type="range" min="0" max="100" value="50" class="flex-grow mr-2 co2-
+range"
+id="co2-tank2-range" data-tank="co2-tank2">
+<input type="number" min="0" max="100" value="50"
+class="w-14 p-1 text-center border border-gray-300 rounded text-sm"
+id="co2-tank2-percent" data-tank="co2-tank2">
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 text-sm">
+<div class="info-box co2-info">
+<span class="block text-gray-600">الحجم:</span>
+<span class="font-bold text-blue-700" id="co2-tank2-volume">17.50 m³</span>
+</div>
+<div class="info-box co2-info">
+<span class="block text-gray-600">الوزن:</span>
+<span class="font-bold text-blue-700" id="co2-tank2-weight">21.88 tons</span>
+</div>
+</div>
+<div class="mt-2 info-box co2-info">
+<span class="block text-gray-600">90 المطلوب للوصول إﱃ%:</span>
+m³</span>
+tons</span>
+<div class="flex justify-between">
+<span class="font-bold text-blue-700" id="co2-tank2-required-volume">14.00
+<span class="font-bold text-blue-700" id="co2-tank2-required-weight">17.50
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-6">
+>-- الوحدة الثالثة --!<
+<div class="card bg-white shadow-md">
+<div class="card-header co2-header">CO2 - 3</div>
+<div class="p-3">
+<div class="tank-container co2-tank h-32 mb-3">
+<div class="tank-level" style="height: 50%;" id="co2-tank3-level"></div>
+<div class="tank-bubble" style="width: 10px; height: 10px; left: 15%; bottom: 50%;">
+</div>
+<div class="tank-bubble" style="width: 8px; height: 8px; left: 45%; bottom: 30%;">
+</div>
+<div class="tank-bubble" style="width: 12px; height: 12px; left: 75%; bottom: 40%;">
+</div>
+display">50%</span>
+</div>
+<div class="mb-2">
+<div class="flex justify-between items-center mb-1">
+<label class="text-sm text-gray-600">المستوى</label>
+<span class="text-sm font-bold text-blue-700" id="co2-tank3-percent-
+</div>
+<div class="flex items-center">
+<input type="range" min="0" max="100" value="50" class="flex-grow mr-2 co2-
+range"
+id="co2-tank3-range" data-tank="co2-tank3">
+<input type="number" min="0" max="100" value="50"
+class="w-14 p-1 text-center border border-gray-300 rounded text-sm"
+id="co2-tank3-percent" data-tank="co2-tank3">
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 text-sm">
+<div class="info-box co2-info">
+<span class="block text-gray-600">الحجم:</span>
+<span class="font-bold text-blue-700" id="co2-tank3-volume">17.50 m³</span>
+</div>
+<div class="info-box co2-info">
+<span class="block text-gray-600">الوزن:</span>
+<span class="font-bold text-blue-700" id="co2-tank3-weight">21.88 tons</span>
+m³</span>
+tons</span>
+</div>
+</div>
+<div class="mt-2 info-box co2-info">
+<span class="block text-gray-600">90 المطلوب للوصول إﱃ%:</span>
+<div class="flex justify-between">
+<span class="font-bold text-blue-700" id="co2-tank3-required-volume">14.00
+<span class="font-bold text-blue-700" id="co2-tank3-required-weight">17.50
+</div>
+</div>
+</div>
+</div>
+>-- الوحدة الرابعة --!<
+<div class="card bg-white shadow-md">
+<div class="card-header co2-header">CO2 - 4</div>
+<div class="p-3">
+<div class="tank-container co2-tank h-32 mb-3">
+<div class="tank-level" style="height: 50%;" id="co2-tank4-level"></div>
+<div class="tank-bubble" style="width: 10px; height: 10px; left: 25%; bottom: 20%;">
+</div>
+<div class="tank-bubble" style="width: 8px; height: 8px; left: 55%; bottom: 60%;">
+</div>
+<div class="tank-bubble" style="width: 12px; height: 12px; left: 85%; bottom: 30%;">
+</div>
+display">50%</span>
+</div>
+<div class="mb-2">
+<div class="flex justify-between items-center mb-1">
+<label class="text-sm text-gray-600">المستوى</label>
+<span class="text-sm font-bold text-blue-700" id="co2-tank4-percent-
+</div>
+<div class="flex items-center">
+<input type="range" min="0" max="100" value="50" class="flex-grow mr-2 co2-
+range"
+id="co2-tank4-range" data-tank="co2-tank4">
+<input type="number" min="0" max="100" value="50"
+class="w-14 p-1 text-center border border-gray-300 rounded text-sm"
+id="co2-tank4-percent" data-tank="co2-tank4">
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 text-sm">
+<div class="info-box co2-info">
+<span class="block text-gray-600">الحجم:</span>
+<span class="font-bold text-blue-700" id="co2-tank4-volume">17.50 m³</span>
+</div>
+<div class="info-box co2-info">
+<span class="block text-gray-600">الوزن:</span>
+<span class="font-bold text-blue-700" id="co2-tank4-weight">21.88 tons</span>
+</div>
+</div>
+<div class="mt-2 info-box co2-info">
+<span class="block text-gray-600">90 المطلوب للوصول إﱃ%:</span>
+<div class="flex justify-between">
+<span class="font-bold text-blue-700" id="co2-tank4-required-volume">14.00
+m³</span>
+<span class="font-bold text-blue-700" id="co2-tank4-required-weight">17.50
+tons</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+>-- HCl صفحة --!<
+<div id="hcl-tab" class="tab-content hidden">
+<h2 class="text-xl font-bold text-center mb-4 text-green-700">HCl</h2>
+<p class="text-sm text-gray-600 mb-4 text-center">25 :سعة الوحدة m³ | 2.1 :الكثافة tons/m³</p>
+<div class="grid grid-cols-2 gap-3 mb-6">
+>-- الوحدة اﻷوﱃ --!<
+<div class="card bg-white shadow-md">
+<div class="card-header hcl-header">HCl - 1</div>
+<div class="p-3">
+<div class="tank-container hcl-tank h-32 mb-3">
+<div class="tank-level" style="height: 50%;" id="hcl-tank1-level"></div>
+<div class="tank-bubble" style="width: 10px; height: 10px; left: 20%; bottom: 30%;">
+</div>
+<div class="tank-bubble" style="width: 8px; height: 8px; left: 50%; bottom: 50%;">
+</div>
+<div class="tank-bubble" style="width: 12px; height: 12px; left: 70%; bottom: 20%;">
+</div>
+</div>
+<div class="mb-2">
+<div class="flex justify-between items-center mb-1">
+<label class="text-sm text-gray-600">المستوى</label>
+<span class="text-sm font-bold text-green-700" id="hcl-tank1-percent-
+display">50%</span>
+range"
+</div>
+<div class="flex items-center">
+<input type="range" min="0" max="100" value="50" class="flex-grow mr-2 hcl-
+id="hcl-tank1-range" data-tank="hcl-tank1">
+<input type="number" min="0" max="100" value="50"
+class="w-14 p-1 text-center border border-gray-300 rounded text-sm"
+id="hcl-tank1-percent" data-tank="hcl-tank1">
+m³</span>
+tons</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 text-sm">
+<div class="info-box hcl-info">
+<span class="block text-gray-600">الحجم:</span>
+<span class="font-bold text-green-700" id="hcl-tank1-volume">12.50 m³</span>
+</div>
+<div class="info-box hcl-info">
+<span class="block text-gray-600">الوزن:</span>
+<span class="font-bold text-green-700" id="hcl-tank1-weight">26.25 tons</span>
+</div>
+</div>
+<div class="mt-2 info-box hcl-info">
+<span class="block text-gray-600">90 المطلوب للوصول إﱃ%:</span>
+<div class="flex justify-between">
+<span class="font-bold text-green-700" id="hcl-tank1-required-volume">10.00
+<span class="font-bold text-green-700" id="hcl-tank1-required-weight">21.00
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+>-- الوحدة الثانية --!<
+<div class="card bg-white shadow-md">
+<div class="card-header hcl-header">HCl - 2</div>
+<div class="p-3">
+<div class="tank-container hcl-tank h-32 mb-3">
+<div class="tank-level" style="height: 50%;" id="hcl-tank2-level"></div>
+<div class="tank-bubble" style="width: 10px; height: 10px; left: 30%; bottom: 40%;">
+<div class="tank-bubble" style="width: 8px; height: 8px; left: 60%; bottom: 20%;">
+<div class="tank-bubble" style="width: 12px; height: 12px; left: 80%; bottom: 60%;">
+</div>
+<div class="mb-2">
+<div class="flex justify-between items-center mb-1">
+<label class="text-sm text-gray-600">المستوى</label>
+<span class="text-sm font-bold text-green-700" id="hcl-tank2-percent-
+display">50%</span>
+</div>
+<div class="flex items-center">
+<input type="range" min="0" max="100" value="50" class="flex-grow mr-2 hcl-
+range"
+id="hcl-tank2-range" data-tank="hcl-tank2">
+<input type="number" min="0" max="100" value="50"
+class="w-14 p-1 text-center border border-gray-300 rounded text-sm"
+id="hcl-tank2-percent" data-tank="hcl-tank2">
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 text-sm">
+<div class="info-box hcl-info">
+<span class="block text-gray-600">الحجم:</span>
+<span class="font-bold text-green-700" id="hcl-tank2-volume">12.50 m³</span>
+</div>
+<div class="info-box hcl-info">
+<span class="block text-gray-600">الوزن:</span>
+<span class="font-bold text-green-700" id="hcl-tank2-weight">26.25 tons</span>
+</div>
+</div>
+<div class="mt-2 info-box hcl-info">
+<span class="block text-gray-600">90 المطلوب للوصول إﱃ%:</span>
+<div class="flex justify-between">
+<span class="font-bold text-green-700" id="hcl-tank2-required-volume">10.00
+m³</span>
+<span class="font-bold text-green-700" id="hcl-tank2-required-weight">21.00
+tons</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+>-- NaOH صفحة --!<
+<div id="naoh-tab" class="tab-content hidden">
+<h2 class="text-xl font-bold text-center mb-4 text-yelow-700">NaOH</h2>
+الكثافة: 0.28 | m³ سعة الوحدة: 26>"p class="text-sm text-gray-600 mb-4 text-center<
+tons/m³</p>
+<div class="grid grid-cols-2 gap-3 mb-6">
+>-- الوحدة اﻷوﱃ --!<
+<div class="card bg-white shadow-md">
+<div class="card-header naoh-header">NaOH - 1</div>
+<div class="p-3">
+<div class="tank-container naoh-tank h-32 mb-3">
+<div class="tank-level" style="height: 50%;" id="naoh-tank1-level"></div>
+<div class="tank-bubble" style="width: 10px; height: 10px; left: 20%; bottom: 30%;">
+</div>
+<div class="tank-bubble" style="width: 8px; height: 8px; left: 50%; bottom: 50%;">
+</div>
+<div class="tank-bubble" style="width: 12px; height: 12px; left: 70%; bottom: 20%;">
+</div>
+display">50%</span>
+</div>
+<div class="mb-2">
+<div class="flex justify-between items-center mb-1">
+<label class="text-sm text-gray-600">المستوى</label>
+<span class="text-sm font-bold text-yelow-700" id="naoh-tank1-percent-
+</div>
+<div class="flex items-center">
+<input type="range" min="0" max="100" value="50" class="flex-grow mr-2 naoh-
+range"
+id="naoh-tank1-range" data-tank="naoh-tank1">
+<input type="number" min="0" max="100" value="50"
+class="w-14 p-1 text-center border border-gray-300 rounded text-sm"
+id="naoh-tank1-percent" data-tank="naoh-tank1">
+m³</span>
+tons</span>
+m³</span>
+tons</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 text-sm">
+<div class="info-box naoh-info">
+<span class="block text-gray-600">الحجم:</span>
+<span class="font-bold text-yelow-700" id="naoh-tank1-volume">13.00
+</div>
+<div class="info-box naoh-info">
+<span class="block text-gray-600">الوزن:</span>
+<span class="font-bold text-yelow-700" id="naoh-tank1-weight">3.64
+</div>
+</div>
+<div class="mt-2 info-box naoh-info">
+<span class="block text-gray-600">90 المطلوب للوصول إﱃ%:</span>
+<div class="flex justify-between">
+<span class="font-bold text-yelow-700" id="naoh-tank1-required-volume">10.40
+<span class="font-bold text-yelow-700" id="naoh-tank1-required-weight">2.91
+</div>
+</div>
+</div>
+</div>
+>-- الوحدة الثانية --!<
+<div class="card bg-white shadow-md">
+<div class="card-header naoh-header">NaOH - 2</div>
+<div class="p-3">
+<div class="tank-container naoh-tank h-32 mb-3">
+<div class="tank-level" style="height: 50%;" id="naoh-tank2-level"></div>
+<div class="tank-bubble" style="width: 10px; height: 10px; left: 30%; bottom: 40%;">
+</div>
+<div class="tank-bubble" style="width: 8px; height: 8px; left: 60%; bottom: 20%;">
+</div>
+<div class="tank-bubble" style="width: 12px; height: 12px; left: 80%; bottom: 60%;">
+</div>
+display">50%</span>
+</div>
+<div class="mb-2">
+<div class="flex justify-between items-center mb-1">
+<label class="text-sm text-gray-600">المستوى</label>
+<span class="text-sm font-bold text-yelow-700" id="naoh-tank2-percent-
+</div>
+<div class="flex items-center">
+<input type="range" min="0" max="100" value="50" class="flex-grow mr-2 naoh-
+range"
+id="naoh-tank2-range" data-tank="naoh-tank2">
+<input type="number" min="0" max="100" value="50"
+class="w-14 p-1 text-center border border-gray-300 rounded text-sm"
+id="naoh-tank2-percent" data-tank="naoh-tank2">
+m³</span>
+tons</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 text-sm">
+<div class="info-box naoh-info">
+<span class="block text-gray-600">الحجم:</span>
+<span class="font-bold text-yelow-700" id="naoh-tank2-volume">13.00
+</div>
+<div class="info-box naoh-info">
+<span class="block text-gray-600">الوزن:</span>
+<span class="font-bold text-yelow-700" id="naoh-tank2-weight">3.64
+</div>
+</div>
+<div class="mt-2 info-box naoh-info">
+m³</span>
+tons</span>
+<span class="block text-gray-600">90 المطلوب للوصول إﱃ%:</span>
+<div class="flex justify-between">
+<span class="font-bold text-yelow-700" id="naoh-tank2-required-volume">10.40
+<span class="font-bold text-yelow-700" id="naoh-tank2-required-weight">2.91
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+تعريف بيانات الخزانات //
+const tankData = {
+'co2': {
+capacity: 35,
+density: 1.25,
+tanks: 4,
+color: 'blue'
+,}
+'hcl': {
+capacity: 25,
+density: 2.1,
+tanks: 2,
+color: 'green'
+,}
+'naoh': {
+capacity: 26,
+density: 0.28,
+tanks: 2,
+color: 'yelow'
+}
+;}
+تبديل بين الصفحات //
+document.querySelectorAl('.tab-item').forEach(tab => {
+tab.addEventListener('click', function() {
+const tabId = this.dataset.tab;
+تحديث اﻷيقونة النشطة //
+document.querySelectorAl('.tab-item').forEach(t => t.classList.remove('tab-active'));
+this.classList.add('tab-active');
+تحديث المحتوى المعروض //
+document.querySelectorAl('.tab-content').forEach(content => content.classList.add('hidden'));
+document.getElementById(`${tabId}-tab`).classList.remove('hidden');
+;)}
+;)}
+تفعيل الصفحة اﻷوﱃ افتراضﻴًا //
+document.querySelector('.tab-item[data-tab="co2"]').classList.add('tab-active');
+تحديث مستوى الخزان والحسابات //
+function updateTankLevel(tankId, percent) {
+تحديث مستوى الخزان المرئي //
+const tankLevel = document.getElementById(`${tankId}-level`);
+tankLevel.style.height = `${percent}%`;
+تحديث عرض النسبة المئوية //
+document.getElementById(`${tankId}-percent-display`).textContent = `${percent}%`;
+)co2, hcl, naoh( استخراج نوع الخزان //
+const tankType = tankId.split('-')[0];
+const capacity = tankData[tankType].capacity;
+const density = tankData[tankType].density;
+حساب الحجم والوزن //
+const volume = (capacity * percent / 100).toFixed(2);
+const weight = (volume * density).toFixed(2);
+تحديث العرض //
+document.getElementById(`${tankId}-volume`).textContent = `${volume} m³`;
+document.getElementById(`${tankId}-weight`).textContent = `${weight} tons`;
+حساب المطلوب للوصول إﱃ 90% لهذا الخزان //
+const requiredPercent = Math.max(0, 90 - percent);
+const requiredVolume = (capacity * requiredPercent / 100).toFixed(2);
+const requiredWeight = (requiredVolume * density).toFixed(2);
+تحديث العرض //
+document.getElementById(`${tankId}-required-volume`).textContent = `${requiredVolume} m³`;
+document.getElementById(`${tankId}-required-weight`).textContent = `${requiredWeight} tons`;
+}
+إعداد أحداث التغيير لجميع الخزانات //
+function setupTankEvents() {
+إعداد أحداث لجميع أنواع الخزانات //
+['co2', 'hcl', 'naoh'].forEach(tankType => {
+const numTanks = tankData[tankType].tanks;
+for (let i = 1; i <= numTanks; i++) {
+const tankId = `${tankType}-tank${i}`;
+const rangeInput = document.getElementById(`${tankId}-range`);
+const percentInput = document.getElementById(`${tankId}-percent`);
+تحديث عند تغيير شريط التمرير //
+rangeInput.addEventListener('input', function() {
+percentInput.value = this.value;
+updateTankLevel(tankId, this.value);
+;)}
+تحديث عند تغيير قيمة النسبة المئوية //
+percentInput.addEventListener('input', function() {
+التأكد من أن القيمة بين 0 و 100 //
+let value = parseInt(this.value);
+if (isNaN(value)) value = 0;
+if (value < 0) value = 0;
+if (value > 100) value = 100;
+this.value = value;
+rangeInput.value = value;
+updateTankLevel(tankId, value);
+;)}
+تحديث القيم اﻷولية //
+updateTankLevel(tankId, 50);
+}
+;)}
+إضافة تأثير الفقاعات المتحركة //
+const bubbles = document.querySelectorAl('.tank-bubble');
+bubbles.forEach((bubble, index) => {
+bubble.style.animationDelay = `${index * 0.5}s`;
+;)}
+}
+تهيئة التطبيق //
+document.addEventListener('DOMContentLoaded', function() {
+setupTankEvents();
+;)}
+</script
