@@ -466,8 +466,8 @@
                 shortName: "SMBS",
                 color: "green",
                 tanks: [
-                    { capacity: 10, concentration: 40, density: 1480, targetConcentration: 40 },
-                    { capacity: 10, concentration: 40, density: 1480, targetConcentration: 40 }
+                    { capacity: 10, concentration: 30, density: 1480, targetConcentration: 30 },
+                    { capacity: 10, concentration: 30, density: 1480, targetConcentration: 30 }
                 ],
                 tankCount: 2,
                 // SMBS specific properties
@@ -923,7 +923,7 @@
             const neededCubicMeter = (neededPercentage / 100) * tank.capacity;
             
             // For SMBS, we need to calculate powder and water
-            const targetConcentration = tank.targetConcentration || 40; // Default to 40% if not specified
+            const targetConcentration = tank.targetConcentration || 30; // Default to 40% if not specified
             const powderAmount = neededCubicMeter * (targetConcentration / 100) * 1000; // in kg
             const bagsNeeded = Math.ceil(powderAmount / chemical.bagWeight);
             const waterNeeded = (neededCubicMeter * 1000) - powderAmount; // in liters
