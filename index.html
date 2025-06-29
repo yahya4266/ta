@@ -1,36 +1,1159 @@
 
-<!DOCTYPE html><html dir="rtl" lang="ar" class="theme light classic"><head><base href="/"><meta charset="utf-8"><title>chemMate</title><meta name="app-name" content="export_website"/><meta name="viewport" content="width=device-width, initial-scale=1"><link href="_assets/8e54262212aed57f.vendor.rtl.css" rel="stylesheet" integrity="sha512-72ACK2Mtyy8efFOcRey6ngf56sJDWjlxSpg3cy8O14DXTSwscY8MwMKEJJJxKmxSrSd/iWCv0noIYW+Irwcq0A==" crossorigin="anonymous"><link href="_assets/1aebd042fb1aaa52.rtl.css" rel="stylesheet" integrity="sha512-zaDRxZqKU60Z0aBtpnIqln+x8zVenrjUqIA/nsW633Ss/uLDnc+YLwueR2FYzTBBtmZ5g7ss0dwLByYXu5hlRQ==" crossorigin="anonymous"><link href="_assets/static_font_4.ltr.css" rel="stylesheet"><link href="_assets/031ce2722000f4e3.runtime.js" rel="preload" as="script" crossorigin="anonymous" integrity="sha512-JQlXulqfGlodEZfqzqGP456qdkrUQVNoBpGxEHIOoiexw8zBPUP7qiZW7QsgPTCnFL2TNYA+RocbWRHeDdyx0Q==" nonce="cb9d9898-1eb1-4386-a504-db4877041e6c"><link href="_assets/c1fefd034e402325.s4le6a.vendor.js" rel="preload" as="script" crossorigin="anonymous" integrity="sha512-U+LQ8Bw6PvtLBFgDSzzdZi67JkLOUVgu9nd0ZpSBpwDrgGUSiAsjhgXw/IfeFob9DNTUes44958WV5jECtA1QA==" nonce="cb9d9898-1eb1-4386-a504-db4877041e6c"><link href="_assets/06ccdda9ac6ff279.vendor.js" rel="preload" as="script" crossorigin="anonymous" integrity="sha512-g44ZyGlAtLq94hrrVUKqbAe0lMHpSbrXcg1ftrUn36edTViGMocT7itRoTU7Le27nkB0oHn8EwWGFlWpemzIZg==" nonce="cb9d9898-1eb1-4386-a504-db4877041e6c"><link href="_assets/42a9f3d3a1e72f19.strings.js" rel="preload" as="script" crossorigin="anonymous" integrity="sha512-pjNpIlXOu/j3ZI//h18rF1rmTlGX3KTztmPGFkPs5F0q28ym+pK6xUD0plybW9IN9URplQ9q2Smoa7h3fUnQ+Q==" nonce="cb9d9898-1eb1-4386-a504-db4877041e6c"><link href="_assets/a3ffc36dab356677.ar.js" rel="preload" as="script" crossorigin="anonymous" integrity="sha512-36F5Cjo6jvzqeySYjRQBnYUm+bwrTJJCln0PIi4sJNXsngqWXWPNnK+qLFKTXWuhiSWd1THMWJaxE0xQsO70ZA==" nonce="cb9d9898-1eb1-4386-a504-db4877041e6c"><link href="_assets/a140836a525c603a.js" rel="preload" as="script" crossorigin="anonymous" integrity="sha512-kiBbzm18VDAlPot+4FXrvxHLUjVDkr2R+/PkAWlKmI1ni5dBxh/7NtLvA9CysrOddN8cd7TH3X7hp/oJu0fk8g==" nonce="cb9d9898-1eb1-4386-a504-db4877041e6c"><meta name="referrer" content="strict-origin-when-cross-origin"><meta property="og:title" content="chemMate"><meta property="og:type" content="website"><link rel="shortcut icon" href="_assets/images/026416169be8ce6eea579ae01e9a2583.png"><link rel="icon" href="_assets/images/08c091f43b46b9ba31b7f00fe73365cb.png" sizes="192x192"><link rel="apple-touch-icon" href="_assets/images/dee2008bdf67c5ae43c0a81158e091e3.png" sizes="180x180"><script nonce="cb9d9898-1eb1-4386-a504-db4877041e6c">
-      document.addEventListener('contextmenu', (e) => {
-        const isMedia = ['img', 'image', 'video', 'svg', 'picture'].some(
-          tagName => tagName.localeCompare(e.target.tagName, undefined, { sensitivity: 'base' }) === 0,
-        );
-        isMedia && e.preventDefault();
-      });
-    </script><script nonce="cb9d9898-1eb1-4386-a504-db4877041e6c">
-  const lang = navigator.language ? navigator.language : 'en';
-  window.canva_installFooter = (container) => {
-    if (!(container instanceof HTMLDivElement)) {
-      return;
-    }
-    fetch('_footer?lang=' + encodeURIComponent(lang)).then(response => {
-      if (response.status !== 200) {
-        return;
-      }
-      response.text().then(footerStr => {
-        const div = document.createElement('div');
-        div.innerHTML = footerStr;
-        for (const child of [...div.children]) {
-          if (child.tagName.toLowerCase() !== 'script') {
-            container.append(child);
-          }
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlRoot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة الخزانات الكيميائية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .font-arabic {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .font-english {
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body {
+            background-color: #f8fafc;
+        }
+        
+        .tank {
+            position: relative;
+            width: 100%;
+            height: 140px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        }
+        
+        .tank-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            background-image: linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(0,0,0,0.1));
+            box-shadow: inset 0 3px 6px rgba(255, 255, 255, 0.2);
+        }
+        
+        .tank-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            font-weight: bold;
+            z-index: 10;
+            font-size: 1.25rem;
+        }
+        
+        .modal {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .modal-enter {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        
+        .modal-enter-active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .chemical-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+        }
+        
+        @media (max-width: 640px) {
+            .chemical-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+        }
+        
+        .chemical-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 70px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .chemical-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(255,255,255,0));
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .chemical-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .chemical-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chemical-btn.active {
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.5), 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Custom range slider styling */
+        input[type="range"] {
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 5px;
+            background: #e2e8f0;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0c8ee7;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            border: 2px solid white;
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0c8ee7;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            border: 2px solid white;
+        }
+        
+        .settings-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .settings-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(255,255,255,0));
+            border-radius: 9999px 9999px 0 0;
+        }
+        
+        .calculation-box {
+            background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .language-switch {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 50;
+        }
+        
+        [dir="ltr"] .language-switch {
+            right: auto;
+            left: 1rem;
+        }
+        
+        .animate-shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+        
+        .rtl-flip {
+            direction: ltr;
+        }
+        
+        [dir="ltr"] .rtl-flip {
+            direction: rtl;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        .toast.success {
+            background-color: #10b981;
+        }
+        
+        .toast.error {
+            background-color: #ef4444;
+        }
+        
+        .toast.info {
+            background-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen font-arabic">
+    <!-- Language Switch Button -->
+    <div class="language-switch">
+        <button id="languageToggle" class="bg-white text-blue-600 border border-blue-200 rounded-full px-3 py-1 text-sm font-medium shadow-sm hover:bg-blue-50 transition-colors">
+            English
+        </button>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="max-w-lg mx-auto px-4 py-8">
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-center text-blue-800 mb-2" data-lang-ar="نظام إدارة الخزانات" data-lang-en="Tank Management System">نظام إدارة الخزانات</h1>
+            <p class="text-center text-slate-500 text-sm mb-6" data-lang-ar="مراقبة وإدارة مستويات المواد الكيميائية" data-lang-en="Monitor and manage chemical levels">مراقبة وإدارة مستويات المواد الكيميائية</p>
+            
+            <!-- Chemical Icons Grid -->
+            <div class="bg-white rounded-2xl shadow-lg mb-5 overflow-hidden p-3">
+                <div class="chemical-grid">
+                    <div class="chemical-btn bg-gradient-to-br from-red-500 to-red-700 text-white" onclick="displayChemicalTanks('H2SO4_INTAKE')">
+                        <div class="text-center font-bold text-xs sm:text-sm z-10">H₂SO₄</div>
+                    </div>
+                    <div class="chemical-btn bg-gradient-to-br from-amber-500 to-amber-700 text-white" onclick="displayChemicalTanks('FECL3')">
+                        <div class="text-center font-bold text-xs sm:text-sm z-10">FeCl₃</div>
+                    </div>
+                    <div class="chemical-btn bg-gradient-to-br from-orange-500 to-orange-700 text-white" onclick="displayChemicalTanks('H2SO4_MAIN')">
+                        <div class="text-center font-bold text-xs sm:text-sm z-10">H₂SO₄</div>
+                    </div>
+                    <div class="chemical-btn bg-gradient-to-br from-blue-500 to-blue-700 text-white" onclick="displayChemicalTanks('NAOH')">
+                        <div class="text-center font-bold text-xs sm:text-sm z-10">NaOH</div>
+                    </div>
+                    <div class="chemical-btn bg-gradient-to-br from-green-500 to-green-700 text-white" onclick="displayChemicalTanks('SMBS')">
+                        <div class="text-center font-bold text-xs sm:text-sm z-10">SMBS</div>
+                    </div>
+                    <div class="chemical-btn bg-gradient-to-br from-teal-500 to-teal-700 text-white" onclick="displayChemicalTanks('NACLO2')">
+                        <div class="text-center font-bold text-xs sm:text-sm z-10">NaClO₂</div>
+                    </div>
+                    <div class="chemical-btn bg-gradient-to-br from-purple-500 to-purple-700 text-white" onclick="displayChemicalTanks('HCL')">
+                        <div class="text-center font-bold text-xs sm:text-sm z-10">HCl</div>
+                    </div>
+                    <div class="chemical-btn bg-gradient-to-br from-slate-600 to-slate-800 text-white" onclick="displayChemicalTanks('CO2')">
+                        <div class="text-center font-bold text-xs sm:text-sm z-10">CO₂</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tank Display Area -->
+        <div id="tankDisplayArea" class="bg-white rounded-2xl p-5 shadow-lg mb-6 min-h-[350px]">
+            <div class="flex justify-center items-center h-full text-slate-400 flex-col">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-3 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                </svg>
+                <p class="text-lg" data-lang-ar="اضغط على أيقونة مادة كيميائية لعرض الخزانات" data-lang-en="Click on a chemical icon to display tanks">اضغط على أيقونة مادة كيميائية لعرض الخزانات</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Button (Bottom Right) -->
+    <div class="fixed bottom-6 right-6">
+        <button id="settingsBtn" class="settings-btn bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" onclick="openPasswordModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Password Modal -->
+    <div id="passwordModal" class="fixed inset-0 bg-slate-900 bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="modal modal-enter bg-white rounded-2xl p-6 w-11/12 max-w-md shadow-2xl">
+            <div class="flex justify-between items-center mb-5">
+                <h2 class="text-2xl font-bold text-blue-800" data-lang-ar="أدخل كلمة المرور" data-lang-en="Enter Password">أدخل كلمة المرور</h2>
+                <button id="closePasswordModal" class="text-slate-400 hover:text-slate-600 transition-colors" onclick="closePasswordModal()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mb-5">
+                <div class="relative">
+                    <input type="password" id="adminPasswordInput" class="w-full p-3 pr-10 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" data-lang-ar-placeholder="أدخل كلمة المرور" data-lang-en-placeholder="Enter password">
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <button id="submitPassword" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all font-medium shadow-md hover:shadow-lg" onclick="checkPassword()" data-lang-ar="تأكيد" data-lang-en="Confirm">تأكيد</button>
+            <p id="passwordError" class="text-red-500 mt-3 text-center hidden" data-lang-ar="كلمة المرور غير صحيحة" data-lang-en="Incorrect password">كلمة المرور غير صحيحة</p>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="fixed inset-0 bg-slate-900 bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="modal modal-enter bg-white rounded-2xl p-6 w-11/12 max-w-md shadow-2xl">
+            <div class="flex justify-between items-center mb-5">
+                <h2 class="text-2xl font-bold text-blue-800" data-lang-ar="إعدادات الخزانات" data-lang-en="Tank Settings">إعدادات الخزانات</h2>
+                <button id="closeSettingsModal" class="text-slate-400 hover:text-slate-600 transition-colors" onclick="closeSettingsModal()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="space-y-5">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2" data-lang-ar="اختر المادة الكيميائية" data-lang-en="Select Chemical">اختر المادة الكيميائية</label>
+                    <div class="relative">
+                        <select id="chemicalSelect" class="w-full p-3 pr-10 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all appearance-none bg-white" onchange="updateSettingsForm()">
+                            <option value="" data-lang-ar="-- اختر المادة --" data-lang-en="-- Select Chemical --">-- اختر المادة --</option>
+                            <option value="H2SO4_INTAKE" data-lang-ar="حمض الكبريتيك (مدخل)" data-lang-en="Sulfuric Acid (Intake)">حمض الكبريتيك (مدخل)</option>
+                            <option value="FECL3" data-lang-ar="كلوريد الحديديك" data-lang-en="Ferric Chloride">كلوريد الحديديك</option>
+                            <option value="H2SO4_MAIN" data-lang-ar="حمض الكبريتيك (رئيسي)" data-lang-en="Sulfuric Acid (Main)">حمض الكبريتيك (رئيسي)</option>
+                            <option value="NAOH" data-lang-ar="هيدروكسيد الصوديوم" data-lang-en="Sodium Hydroxide">هيدروكسيد الصوديوم</option>
+                            <option value="SMBS" data-lang-ar="ميتابيسلفيت الصوديوم" data-lang-en="Sodium Metabisulfite">ميتابيسلفيت الصوديوم</option>
+                            <option value="NACLO2" data-lang-ar="كلوريت الصوديوم" data-lang-en="Sodium Chlorite">كلوريت الصوديوم</option>
+                            <option value="HCL" data-lang-ar="حمض الهيدروكلوريك" data-lang-en="Hydrochloric Acid">حمض الهيدروكلوريك</option>
+                            <option value="CO2" data-lang-ar="ثاني أكسيد الكربون" data-lang-en="Carbon Dioxide">ثاني أكسيد الكربون</option>
+                        </select>
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none rtl-flip">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2" data-lang-ar="سعة الخزان (متر مكعب)" data-lang-en="Tank Capacity (m³)">سعة الخزان (متر مكعب)</label>
+                    <div class="relative">
+                        <input type="number" id="tankCapacity" class="w-full p-3 pr-10 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" min="0" step="0.1">
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none rtl-flip">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="materialConcentration" class="block text-sm font-medium text-slate-700 mb-2" data-lang-ar="تركيز المادة (%)" data-lang-en="Material Concentration (%)">تركيز المادة (%)</label>
+                    <div class="relative">
+                        <input type="number" id="materialConcentration" class="w-full p-3 pr-10 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" min="0" max="100" step="0.1">
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none rtl-flip">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="materialDensity" class="block text-sm font-medium text-slate-700 mb-2" data-lang-ar="كثافة المادة (كجم/متر مكعب)" data-lang-en="Material Density (kg/m³)">كثافة المادة (كجم/متر مكعب)</label>
+                    <div class="relative">
+                        <input type="number" id="materialDensity" class="w-full p-3 pr-10 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" min="0" step="0.01">
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none rtl-flip">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="saveSettings" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all font-medium shadow-md hover:shadow-lg mt-2" onclick="saveSettingsFromModal()" data-lang-ar="حفظ الإعدادات" data-lang-en="Save Settings">حفظ الإعدادات</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Global variables
+        let chemicals = {
+            H2SO4_INTAKE: {
+                name: "حمض الكبريتيك (مدخل)",
+                name_en: "Sulfuric Acid (Intake)",
+                shortName: "H₂SO₄ INTAKE",
+                color: "red",
+                tanks: [
+                    { capacity: 25, concentration: 98, density: 1830 },
+                    { capacity: 25, concentration: 98, density: 1830 }
+                ],
+                tankCount: 2
+            },
+            FECL3: {
+                name: "كلوريد الحديديك",
+                name_en: "Ferric Chloride",
+                shortName: "FeCl₃",
+                color: "amber",
+                tanks: [
+                    { capacity: 50, concentration: 40, density: 1460 },
+                    { capacity: 50, concentration: 40, density: 1460 }
+                ],
+                tankCount: 2
+            },
+            H2SO4_MAIN: {
+                name: "حمض الكبريتيك (رئيسي)",
+                name_en: "Sulfuric Acid (Main)",
+                shortName: "H₂SO₄ MAIN",
+                color: "orange",
+                tanks: [
+                    { capacity: 25, concentration: 98, density: 1830 },
+                    { capacity: 25, concentration: 98, density: 1830 }
+                ],
+                tankCount: 2
+            },
+            NAOH: {
+                name: "هيدروكسيد الصوديوم",
+                name_en: "Sodium Hydroxide",
+                shortName: "NaOH",
+                color: "blue",
+                tanks: [
+                    { capacity: 35, concentration: 50, density: 1540 },
+                    { capacity: 35, concentration: 50, density: 1540 }
+                ],
+                tankCount: 2
+            },
+            SMBS: {
+                name: "ميتابيسلفيت الصوديوم",
+                name_en: "Sodium Metabisulfite",
+                shortName: "SMBS",
+                color: "green",
+                tanks: [
+                    { capacity: 10, concentration: 40, density: 1480, targetConcentration: 40 },
+                    { capacity: 10, concentration: 40, density: 1480, targetConcentration: 40 }
+                ],
+                tankCount: 2,
+                // SMBS specific properties
+                bagWeight: 25, // kg per bag
+                isPowder: true
+            },
+            NACLO2: {
+                name: "كلوريت الصوديوم",
+                name_en: "Sodium Chlorite",
+                shortName: "NaClO₂",
+                color: "teal",
+                tanks: [
+                    { capacity: 27, concentration: 25, density: 1280 },
+                    { capacity: 27, concentration: 25, density: 1280 }
+                ],
+                tankCount: 2
+            },
+            HCL: {
+                name: "حمض الهيدروكلوريك",
+                name_en: "Hydrochloric Acid",
+                shortName: "HCl",
+                color: "purple",
+                tanks: [
+                    { capacity: 25, concentration: 35, density: 1150 },
+                    { capacity: 25, concentration: 35, density: 1150 }
+                ],
+                tankCount: 2
+            },
+            CO2: {
+                name: "ثاني أكسيد الكربون",
+                name_en: "Carbon Dioxide",
+                shortName: "CO₂",
+                color: "slate",
+                tanks: [
+                    { capacity: 80, concentration: 99, density: 1030 },
+                    { capacity: 80, concentration: 99, density: 1030 },
+                    { capacity: 80, concentration: 99, density: 1030 },
+                    { capacity: 80, concentration: 99, density: 1030 }
+                ],
+                tankCount: 4
+            }
+        };
+        
+        let currentChemical = null;
+        const ADMIN_PASSWORD = "Swccph4";
+        let currentLanguage = "ar"; // Default language is Arabic
+        let tankLevels = {}; // Store tank levels for each chemical
+        
+        // Translation objects
+        const translations = {
+            ar: {
+                tankTitle: "خزان",
+                fillPercentage: "نسبة الامتلاء (%)",
+                calculations: "التحويلات",
+                currentValues: "القيم الحالية",
+                cubicMeter: "متر مكعب",
+                ton: "طن",
+                toReach90: "للوصول إلى 90%",
+                smbsCalculatorTitle: "حاسبة تحضير SMBS للوصول إلى 90%",
+                requiredMaterials: "كمية المواد المطلوبة",
+                powderAmount: "كمية البودر",
+                bagsCount: "عدد الأكياس",
+                waterAmount: "كمية الماء",
+                kg: "كجم",
+                bag: "كيس",
+                liter: "لتر",
+                settingsSaved: "تم حفظ الإعدادات بنجاح",
+                errorSavingSettings: "حدث خطأ أثناء حفظ الإعدادات. يرجى المحاولة مرة أخرى.",
+                selectChemical: "الرجاء اختيار المادة الكيميائية",
+                invalidCapacity: "الرجاء إدخال سعة خزان صالحة",
+                invalidConcentration: "الرجاء إدخال تركيز مادة صالح (0-100%)",
+                invalidDensity: "الرجاء إدخال كثافة مادة صالحة",
+                clickChemical: "اضغط على أيقونة مادة كيميائية لعرض الخزانات"
+            },
+            en: {
+                tankTitle: "Tank",
+                fillPercentage: "Fill Percentage (%)",
+                calculations: "Calculations",
+                currentValues: "Current Values",
+                cubicMeter: "Cubic Meter",
+                ton: "Ton",
+                toReach90: "To Reach 90%",
+                smbsCalculatorTitle: "SMBS Preparation Calculator to Reach 90%",
+                requiredMaterials: "Required Materials",
+                powderAmount: "Powder Amount",
+                bagsCount: "Bags Count",
+                waterAmount: "Water Amount",
+                kg: "kg",
+                bag: "bag",
+                liter: "liter",
+                settingsSaved: "Settings saved successfully",
+                errorSavingSettings: "Error saving settings. Please try again.",
+                selectChemical: "Please select a chemical",
+                invalidCapacity: "Please enter a valid tank capacity",
+                invalidConcentration: "Please enter a valid material concentration (0-100%)",
+                invalidDensity: "Please enter a valid material density",
+                clickChemical: "Click on a chemical icon to display tanks"
+            }
+        };
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load language preference from localStorage
+            const savedLanguage = localStorage.getItem('tankManagementLanguage');
+            if (savedLanguage) {
+                currentLanguage = savedLanguage;
+                applyLanguage(currentLanguage);
+            }
+            
+            // Load saved tank levels from localStorage
+            const savedTankLevels = localStorage.getItem('tankLevels');
+            if (savedTankLevels) {
+                try {
+                    tankLevels = JSON.parse(savedTankLevels);
+                } catch (e) {
+                    console.error("Error parsing saved tank levels:", e);
+                    tankLevels = {};
+                }
+            }
+            
+            // Load saved chemicals data from localStorage
+            const savedChemicals = localStorage.getItem('chemicals');
+            if (savedChemicals) {
+                try {
+                    chemicals = JSON.parse(savedChemicals);
+                } catch (e) {
+                    console.error("Error parsing saved chemicals:", e);
+                }
+            }
+            
+            // Add event listener for password input
+            document.getElementById('adminPasswordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+            
+            // Add event listener for language toggle
+            document.getElementById('languageToggle').addEventListener('click', toggleLanguage);
+            
+            // Set initial language button text
+            updateLanguageButton();
+            
+            // Set initial input placeholders based on language
+            updateInputPlaceholders();
+            
+            // Save the updated chemicals data to localStorage
+            localStorage.setItem('chemicals', JSON.stringify(chemicals));
+        });
+
+        function displayChemicalTanks(chemicalId) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.chemical-btn').forEach(b => b.classList.remove('active'));
+            
+            // Add active class to clicked button
+            const activeBtn = document.querySelector(`.chemical-btn[onclick*="${chemicalId}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+            
+            currentChemical = chemicalId;
+            const chemical = chemicals[chemicalId];
+            const tankCount = chemical.tankCount;
+            
+            const displayArea = document.getElementById('tankDisplayArea');
+            
+            // Clear previous content
+            displayArea.innerHTML = '';
+            
+            // Add chemical title
+            const title = document.createElement('h2');
+            title.className = 'text-2xl font-bold mb-5 text-center text-slate-800';
+            title.textContent = currentLanguage === 'ar' ? chemical.name : chemical.name_en;
+            displayArea.appendChild(title);
+            
+            // Create tanks based on count
+            if (tankCount === 2) {
+                // Two tanks in a grid
+                const tanksContainer = document.createElement('div');
+                tanksContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-6';
+                
+                for (let i = 0; i < 2; i++) {
+                    const tankContainer = createTankContainer(chemical, i);
+                    tanksContainer.appendChild(tankContainer);
+                }
+                
+                displayArea.appendChild(tanksContainer);
+            } else if (tankCount === 4) {
+                // Four tanks in a 2x2 grid
+                const tanksContainer = document.createElement('div');
+                tanksContainer.className = 'grid grid-cols-1 sm:grid-cols-2 gap-6';
+                
+                for (let i = 0; i < 4; i++) {
+                    const tankContainer = createTankContainer(chemical, i);
+                    tanksContainer.appendChild(tankContainer);
+                }
+                
+                displayArea.appendChild(tanksContainer);
+            }
+            
+            // Set tank levels from saved data if available
+            if (tankLevels[chemicalId]) {
+                for (let i = 0; i < tankCount; i++) {
+                    if (tankLevels[chemicalId][i] !== undefined) {
+                        const slider = document.getElementById(`tank${i}Range`);
+                        if (slider) {
+                            slider.value = tankLevels[chemicalId][i];
+                            updateTank(i);
+                            
+                            // If this is SMBS, update the calculator with the current tank level
+                            if (currentChemical === 'SMBS') {
+                                updateSMBSCalculator(i);
+                            }
+                        }
+                    }
+                }
+            }
         }
 
-        (() => { !function(e){"use strict";const t=document.getElementById("modal_backdrop"),n=document.getElementById("modal"),o=document.getElementById("captcha-form"),c=document.getElementById("report_button"),d=document.getElementById("form_report"),s=document.getElementById("form_cancel"),l=document.getElementById("form_submit_reason"),a=document.getElementById("form_go_back"),r=document.getElementById("form_submit_captcha"),m=document.getElementById("form_close"),i=document.getElementById("form_close_initial"),u=document.getElementById("report_reason_0"),p=document.getElementById("error_message"),_=document.getElementById("error_message_captcha"),y=new Map;y.set(0,document.getElementById("form_step_terms")),y.set(1,document.getElementById("form_step_report_reason")),y.set(4,document.getElementById("form_step_report_other"));const E=document.getElementById("form_step_report_ip");E&&y.set(5,E),y.set(2,document.getElementById("form_step_captcha")),y.set(3,document.getElementById("form_step_success"));const f=document.getElementById("report_reason_4"),g=document.getElementById("form_close_ip"),h=document.getElementById("form_go_back_ip"),I=document.getElementById("report_reason_other"),k=document.getElementById("form_close_other"),w=document.getElementById("form_go_back_other");function v(){t.classList.remove("active"),n.classList.remove("active"),c.classList.remove("active"),c.focus()}function B(e){y.forEach(((t,n)=>{n===e?(t.style.display="block",L(t)):t.style.display="none"}))}let b,C=!1;const T="NETEASE"===window.C_CAPTCHA_IMPLEMENTATION?()=>b:()=>{const e=o.elements.namedItem("g-recaptcha-response");return null==e?void 0:e.value};t.onclick=v,s.onclick=v,m.onclick=v,i.onclick=v,g&&(g.onclick=v),k.onclick=v,c.onclick=function(){y.forEach(((e,t)=>{e.style.display=0===t?"block":"none"})),t.classList.add("active"),n.classList.add("active"),c.classList.add("active"),u.checked=!0,setTimeout((()=>{L(y.get(0))}),350)},d.onclick=d.dataset.reportUrl?function(){const{origin:e,pathname:t}=window.location,n=e+t,o=d.dataset.reportUrl+encodeURIComponent(n);window.open(o)}:()=>B(1),l.onclick=()=>{null!=E&&f.checked?B(5):I.checked?B(4):(B(2),function(){if(C)return;const e=document.createElement("script");e.src="NETEASE"===window.C_CAPTCHA_IMPLEMENTATION?"https://cstaticdun.126.net/load.min.js":"https://www.google.com/recaptcha/api.js",e.async=!0,e.defer=!0,document.head.appendChild(e),C=!0,e.onload="NETEASE"===window.C_CAPTCHA_IMPLEMENTATION?()=>{var e;null===(e=window.initNECaptcha)||void 0===e||e.call(window,{captchaId:window.C_CAPTCHA_KEY,element:"#netease-captcha",protocol:"https",width:"auto",onVerify:(e,t)=>{b=t.validate}})}:()=>{}}())},a.onclick=()=>B(1),h&&(h.onclick=()=>B(1)),w.onclick=()=>B(1),o.addEventListener("submit",(function(e){e.preventDefault(),p.style.display="none",_.style.display="none";const t=function(){let e="";const t=document.getElementsByName("report_reason");for(let n=0;n<t.length;n++){const o=t[n];o.checked&&(e=o.value)}return e}(),n=T();if(!n)return void(_.style.display="block");const o={reason:t,challenge:n},c=window.location.origin+window.location.pathname+"/_api/report";r.classList.add("loading"),fetch(c,{method:"POST",body:JSON.stringify(o),headers:{"Content-Type":"application/json; charset=utf-8"}}).then((e=>{r.classList.remove("loading"),e.ok?B(3):p.style.display="block"}))}));const A=new Map,L=e=>{const t=A.get(e);null!=t&&document.removeEventListener("keydown",t);const n=e.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'),o=e,c=n[n.length-1],d=function(e){("Tab"===e.key||9===e.keyCode)&&(e.shiftKey?document.activeElement===o&&(c.focus(),e.preventDefault()):document.activeElement===c&&(o.focus(),e.preventDefault()))};A.set(e,d),document.addEventListener("keydown",d),o.focus()};e.keepFocus=L,Object.defineProperty(e,"__esModule",{value:!0})}({}); })();
-      });
-    });
-  }
-</script><script nonce="cb9d9898-1eb1-4386-a504-db4877041e6c">
-    window.C_CAPTCHA_IMPLEMENTATION = 'RECAPTCHA';
-</script><script nonce="cb9d9898-1eb1-4386-a504-db4877041e6c">
-    window.C_CAPTCHA_KEY = '6LdpNmIrAAAAAHQVezN3pBAfDjQQ2qUpo881f24o';
-</script></head><body><script nonce="cb9d9898-1eb1-4386-a504-db4877041e6c">document.documentElement.classList.replace('adaptive', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');</script><div id="root"></div><script nonce="cb9d9898-1eb1-4386-a504-db4877041e6c">(function() {window['__canva_public_path__'] = '_assets\/'; window['bootstrap'] = JSON.parse('{"base":{"A?":"B","L":false,"N":false,"E":"23b4ac2f967b9f761af413d473b2fc7b7d3248e5","K":1751136263,"F":{"A?":"B"},"G":"CLIENT_FULL","I":"A","O":{"A?":"B"},"M":"/_online","U":[],"V":[],"a":{"K":"export_website","H":{}},"d":{"A":"wss://www.canva.com/_stream","B":{"F":"export_website"}},"b":{"A?":"H","C":{"a":"WEB"},"D":{"a":"WEB","c":"ar"},"E":{},"P":[],"Q":[],"R":false,"S":false}},"page":{"A":{"B":{"A?":"A","A":"TAGcbLa0hys","B":1},"C":{"A":1366.0,"B":768.0,"C":"D"},"Q":[],"R":[],"P":"ar","D":"chemMate","E":"","F":[],"G":{},"Y":{},"a":[],"b":[],"V":[],"W":[],"A":[{"A?":"j","Z":{"A?":"A","A":"TAGcbLa0hys","B":1},"a":"PBBCCcW4YF5dWVBw","R":false,"S":false,"U":false,"Q":{},"v":"B","t":[{"A?":"i","a":"PBYGg5xft0d0bpqF","R":false,"S":false,"U":false,"Q":{},"W":[],"X":[],"H":[],"L":{},"C":{"A":1366.0,"B":768.0,"C":"D"},"D":{"C":"#ffffff","D":0.0,"F":false,"J":false,"G":false,"H":false},"r":[],"E":[{"A?":"O","A":0.0,"B":0.0,"D":1366.0,"C":768.0,"E":0.0,"F":0.0,"BD":[],"BE":[],"BA":[],"BB":[],"Q":false,"S":false,"P":[],"5":{},"T":{},"W":{},"a":"_website-element-widget?version=v2&pageIndex=0&elementIndex=0&elementType=C&locale=ar","b":1366.0,"c":768.0}],"I":[]}],"u":[],"L":{}}],"I":[]},"Z":{"A?":"E","K":{"A":"MAGrYd8gbWw","B":1},"M":"ar","e":false,"f":{"B":"#ffffff","C":"#304254"},"g":[{"A?":"A","K":"PBBCCcW4YF5dWVBw","L":"/","e":{"A":true}}]},"B":[{"A":"YACgEZ1cb1Q","B":0,"C":"Arimo","D":[{"style":"ITALICS","files":[{"url":"_assets/fonts/ac9b8a560f98d1757a4565a2419d33c3.woff","format":"WOFF","unicodeRanges":[],"sizeBytes":240632},{"url":"_assets/fonts/79d14bb61301a10c73c6cb293c29b309.otf","format":"OTF","unicodeRanges":[],"sizeBytes":440740},{"url":"_assets/fonts/d257a7100844bc3f98c9021168b6249e.woff2","format":"WOFF2","unicodeRanges":[],"sizeBytes":201132}],"subsettedFiles":[],"scriptSubsetFiles":[],"metadata":{"head":{"unitsPerEm":2048,"yMin":-621,"yMax":2077},"hhea":{"ascender":1854,"descender":-434,"lineGap":67},"os2":{"sTypoAscender":1491,"sTypoDescender":-425,"sTypoLineGap":307,"usWinAscent":1854,"usWinDescent":434,"fsSelection":1}}},{"style":"BOLD_ITALICS","files":[{"url":"_assets/fonts/7fc2786f9023d4d812357cb787e9ad4b.woff","format":"WOFF","unicodeRanges":[],"sizeBytes":237660},{"url":"_assets/fonts/4de29305db46625343735e840e3d27aa.otf","format":"OTF","unicodeRanges":[],"sizeBytes":435028},{"url":"_assets/fonts/1060345c54d396e76d73f1da7ee200bd.woff2","format":"WOFF2","unicodeRanges":[],"sizeBytes":203232}],"subsettedFiles":[],"scriptSubsetFiles":[],"metadata":{"head":{"unitsPerEm":2048,"yMin":-771,"yMax":2109},"hhea":{"ascender":1854,"descender":-434,"lineGap":67},"os2":{"sTypoAscender":1491,"sTypoDescender":-431,"sTypoLineGap":307,"usWinAscent":1854,"usWinDescent":434,"fsSelection":33}}},{"style":"BOLD","files":[{"url":"_assets/fonts/0bb563f2f60ffd4e62b64cb021c33776.otf","format":"OTF","unicodeRanges":[],"sizeBytes":438516},{"url":"_assets/fonts/98c4d2c0223fc8474641c77f923528e9.woff2","format":"WOFF2","unicodeRanges":[],"sizeBytes":194064},{"url":"_assets/fonts/9fd726aeae98b22824f0dc8947036e77.woff","format":"WOFF","unicodeRanges":[],"sizeBytes":234696}],"subsettedFiles":[],"scriptSubsetFiles":[],"metadata":{"head":{"unitsPerEm":2048,"yMin":-771,"yMax":2116},"hhea":{"ascender":1854,"descender":-434,"lineGap":67},"os2":{"sTypoAscender":1491,"sTypoDescender":-431,"sTypoLineGap":307,"usWinAscent":1854,"usWinDescent":434,"fsSelection":32}}},{"style":"REGULAR","files":[{"url":"_assets/fonts/daee28464eba92254cb149feea6599e3.otf","format":"OTF","unicodeRanges":[],"sizeBytes":436180},{"url":"_assets/fonts/f8f199f09526f79e87644ed227e0f651.woff2","format":"WOFF2","unicodeRanges":[],"sizeBytes":194188},{"url":"_assets/fonts/4ff8a742aa834e35f10ead140b735c45.woff","format":"WOFF","unicodeRanges":[],"sizeBytes":234380}],"subsettedFiles":[],"scriptSubsetFiles":[],"metadata":{"head":{"unitsPerEm":2048,"yMin":-621,"yMax":2007},"hhea":{"ascender":1854,"descender":-434,"lineGap":67},"os2":{"sTypoAscender":1491,"sTypoDescender":-431,"sTypoLineGap":307,"usWinAscent":1854,"usWinDescent":434,"fsSelection":64}}}],"E":false}],"E":[],"F":[],"G":[],"H":[{"A":"https://www.canva-hosted-embed.com/codelet/beta4ka76c0ssdpr","Q":false,"B":"Canva","D":1751136262930,"E":"\x3ciframe src=\\"https://beta4ka76c0ssdpr.canva-hosted-embed.com/codelet/AAEAEGJldGE0a2E3NmMwc3NkcHIAAAAAAZe9ATcSZUKUz91XnN_wsyjuV36pIrcw8fwIRtTchpv_q81hocg/\\" sandbox=\\"allow-same-origin allow-scripts allow-popups allow-forms\\" allowfullscreen=\\"true\\" width=\\"800\\" height=\\"450\\" style=\\"position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 8px;\\" allow=\\"fullscreen\\">\x3c/iframe>","F":1366,"G":768},{"A":"_website-element-widget?version=v2&pageIndex=0&elementIndex=0&elementType=C&locale=ar","Q":false,"B":"Canva","D":1751136263012,"E":"\x3ciframe src=\\"_website-element-widget?version=v2&pageIndex=0&elementIndex=0&elementType=C&locale=ar\\" width=\\"1366\\" height=\\"768\\" frameborder=\\"0\\" sandbox=\\"allow-same-origin allow-scripts allow-popups allow-forms allow-popups-to-escape-sandbox\\" style=\\"width:100%;height:100%;border:0\\">\x3c/iframe>","F":1366,"G":768}],"S":[],"K":{"B":"#ffffff","C":"#304254"},"Q":{"A":false,"B":true,"M":true},"R":false,"T":true,"U":false,"V":false},"ui":{"N":false,"A":true,"B":"B","C":false,"D":false,"K":"A","I":true,"J":false}}'); window['flags'] = JSON.parse('{"5d40ae58":true,"978ce15d":150000.0}'); window['cmsg'] = window['cmsg'] || { locale: "ar", strings: {} };})();</script><script crossorigin="anonymous" src="_assets/031ce2722000f4e3.runtime.js" defer integrity="sha512-JQlXulqfGlodEZfqzqGP456qdkrUQVNoBpGxEHIOoiexw8zBPUP7qiZW7QsgPTCnFL2TNYA+RocbWRHeDdyx0Q==" nonce="cb9d9898-1eb1-4386-a504-db4877041e6c"></script><script crossorigin="anonymous" src="_assets/c1fefd034e402325.s4le6a.vendor.js" defer integrity="sha512-U+LQ8Bw6PvtLBFgDSzzdZi67JkLOUVgu9nd0ZpSBpwDrgGUSiAsjhgXw/IfeFob9DNTUes44958WV5jECtA1QA==" nonce="cb9d9898-1eb1-4386-a504-db4877041e6c"></script><script crossorigin="anonymous" src="_assets/06ccdda9ac6ff279.vendor.js" defer integrity="sha512-g44ZyGlAtLq94hrrVUKqbAe0lMHpSbrXcg1ftrUn36edTViGMocT7itRoTU7Le27nkB0oHn8EwWGFlWpemzIZg==" nonce="cb9d9898-1eb1-4386-a504-db4877041e6c"></script><script crossorigin="anonymous" src="_assets/42a9f3d3a1e72f19.strings.js" integrity="sha512-pjNpIlXOu/j3ZI//h18rF1rmTlGX3KTztmPGFkPs5F0q28ym+pK6xUD0plybW9IN9URplQ9q2Smoa7h3fUnQ+Q==" nonce="cb9d9898-1eb1-4386-a504-db4877041e6c"></script><script crossorigin="anonymous" src="_assets/a3ffc36dab356677.ar.js" integrity="sha512-36F5Cjo6jvzqeySYjRQBnYUm+bwrTJJCln0PIi4sJNXsngqWXWPNnK+qLFKTXWuhiSWd1THMWJaxE0xQsO70ZA==" nonce="cb9d9898-1eb1-4386-a504-db4877041e6c"></script><script crossorigin="anonymous" src="_assets/a140836a525c603a.js" defer integrity="sha512-kiBbzm18VDAlPot+4FXrvxHLUjVDkr2R+/PkAWlKmI1ni5dBxh/7NtLvA9CysrOddN8cd7TH3X7hp/oJu0fk8g==" nonce="cb9d9898-1eb1-4386-a504-db4877041e6c"></script></body></html>
+        function createTankContainer(chemical, tankIndex) {
+            const tankContainer = document.createElement('div');
+            tankContainer.className = 'mb-5';
+            tankContainer.id = `tankContainer${tankIndex}`;
+            
+            // Tank title
+            const tankTitle = document.createElement('h3');
+            tankTitle.className = 'text-center font-bold mb-3 text-slate-700';
+            tankTitle.textContent = `${translations[currentLanguage].tankTitle} ${tankIndex + 1}`;
+            tankContainer.appendChild(tankTitle);
+            
+            // Tank visual
+            const tankVisual = document.createElement('div');
+            tankVisual.className = 'tank bg-slate-200';
+            tankVisual.id = `tank${tankIndex}`;
+            
+            const tankFill = document.createElement('div');
+            tankFill.className = `tank-fill bg-${chemical.color}-600`;
+            tankFill.id = `tank${tankIndex}Fill`;
+            tankFill.style.height = '0%';
+            
+            const tankLabel = document.createElement('div');
+            tankLabel.className = 'tank-label';
+            tankLabel.id = `tank${tankIndex}Label`;
+            tankLabel.textContent = '0%';
+            
+            tankVisual.appendChild(tankFill);
+            tankVisual.appendChild(tankLabel);
+            tankContainer.appendChild(tankVisual);
+            
+            // Tank slider
+            const sliderContainer = document.createElement('div');
+            sliderContainer.className = 'mb-5 mt-4';
+            
+            const sliderLabel = document.createElement('label');
+            sliderLabel.className = 'block text-sm font-medium text-slate-700 mb-2';
+            sliderLabel.textContent = translations[currentLanguage].fillPercentage;
+            
+            const slider = document.createElement('input');
+            slider.type = 'range';
+            slider.id = `tank${tankIndex}Range`;
+            slider.min = '0';
+            slider.max = '100';
+            slider.value = '0';
+            slider.className = 'w-full h-2 rounded-lg appearance-none cursor-pointer';
+            
+            const sliderValues = document.createElement('div');
+            sliderValues.className = 'flex justify-between mt-2';
+            
+            const minValue = document.createElement('span');
+            minValue.className = 'text-xs text-slate-500';
+            minValue.textContent = '0%';
+            
+            const currentValue = document.createElement('span');
+            currentValue.className = 'text-xs font-medium bg-blue-100 text-blue-800 px-2 py-1 rounded-full';
+            currentValue.id = `tank${tankIndex}Value`;
+            currentValue.textContent = '0%';
+            
+            const maxValue = document.createElement('span');
+            maxValue.className = 'text-xs text-slate-500';
+            maxValue.textContent = '100%';
+            
+            sliderValues.appendChild(minValue);
+            sliderValues.appendChild(currentValue);
+            sliderValues.appendChild(maxValue);
+            
+            sliderContainer.appendChild(sliderLabel);
+            sliderContainer.appendChild(slider);
+            sliderContainer.appendChild(sliderValues);
+            
+            tankContainer.appendChild(sliderContainer);
+            
+            // Calculations container
+            const calculationsContainer = document.createElement('div');
+            calculationsContainer.className = 'calculation-box p-4 rounded-xl';
+            calculationsContainer.id = `calculationsContainer${tankIndex}`;
+            
+            const calculationsTitle = document.createElement('h4');
+            calculationsTitle.className = 'text-sm font-medium mb-3 text-slate-700';
+            calculationsTitle.textContent = translations[currentLanguage].calculations;
+            
+            const calculationsList = document.createElement('div');
+            calculationsList.className = 'space-y-2 text-sm';
+            
+            // Current values
+            const currentValuesBox = document.createElement('div');
+            currentValuesBox.className = 'bg-white p-3 rounded-lg shadow-sm border border-slate-100';
+            
+            const currentTitle = document.createElement('p');
+            currentTitle.className = 'text-xs text-slate-500 mb-2';
+            currentTitle.textContent = translations[currentLanguage].currentValues;
+            
+            const cubicMeterText = document.createElement('p');
+            cubicMeterText.className = 'flex justify-between';
+            cubicMeterText.innerHTML = `<span class="font-medium">${translations[currentLanguage].cubicMeter}:</span> <span id="tank${tankIndex}CubicMeter" class="text-blue-700 font-medium">0</span>`;
+            
+            const tonText = document.createElement('p');
+            tonText.className = 'flex justify-between';
+            tonText.innerHTML = `<span class="font-medium">${translations[currentLanguage].ton}:</span> <span id="tank${tankIndex}Ton" class="text-blue-700 font-medium">0</span>`;
+            
+            currentValuesBox.appendChild(currentTitle);
+            currentValuesBox.appendChild(cubicMeterText);
+            currentValuesBox.appendChild(tonText);
+            
+            // Needed to reach 90%
+            const neededValuesBox = document.createElement('div');
+            neededValuesBox.className = 'bg-white p-3 rounded-lg shadow-sm border border-slate-100';
+            
+            const neededTitle = document.createElement('p');
+            neededTitle.className = 'text-xs text-slate-500 mb-2';
+            neededTitle.textContent = translations[currentLanguage].toReach90;
+            
+            const neededCubicMeterText = document.createElement('p');
+            neededCubicMeterText.className = 'flex justify-between';
+            neededCubicMeterText.innerHTML = `<span class="font-medium">${translations[currentLanguage].cubicMeter}:</span> <span id="tank${tankIndex}NeededCubicMeter" class="text-blue-700 font-medium">0</span>`;
+            
+            const neededTonText = document.createElement('p');
+            neededTonText.className = 'flex justify-between';
+            neededTonText.innerHTML = `<span class="font-medium">${translations[currentLanguage].ton}:</span> <span id="tank${tankIndex}NeededTon" class="text-blue-700 font-medium">0</span>`;
+            
+            neededValuesBox.appendChild(neededTitle);
+            neededValuesBox.appendChild(neededCubicMeterText);
+            neededValuesBox.appendChild(neededTonText);
+            
+            calculationsList.appendChild(currentValuesBox);
+            calculationsList.appendChild(neededValuesBox);
+            
+            calculationsContainer.appendChild(calculationsTitle);
+            calculationsContainer.appendChild(calculationsList);
+            
+            tankContainer.appendChild(calculationsContainer);
+            
+            // Add SMBS calculator if the chemical is SMBS
+            if (chemical.shortName === 'SMBS') {
+                const smbsCalculator = createSMBSCalculator(tankIndex);
+                tankContainer.appendChild(smbsCalculator);
+            }
+            
+            // Add event listener to slider
+            slider.addEventListener('input', () => {
+                updateTank(tankIndex);
+                // If this is SMBS, update the calculator with the current tank level
+                if (currentChemical === 'SMBS') {
+                    updateSMBSCalculator(tankIndex);
+                }
+                
+                // Save tank levels to localStorage with debounce
+                clearTimeout(slider.saveTimeout);
+                slider.saveTimeout = setTimeout(() => {
+                    saveTankLevels();
+                }, 1000);
+            });
+            
+            return tankContainer;
+        }
+
+        function createSMBSCalculator(tankIndex) {
+            const calculatorContainer = document.createElement('div');
+            calculatorContainer.className = 'bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-xl mt-4 border border-green-200';
+            calculatorContainer.id = `smbsCalculator${tankIndex}`;
+            
+            const calculatorTitle = document.createElement('h4');
+            calculatorTitle.className = 'text-sm font-medium mb-3 text-green-800 flex items-center';
+            calculatorTitle.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                ${translations[currentLanguage].smbsCalculatorTitle}
+            `;
+            
+            const calculatorContent = document.createElement('div');
+            calculatorContent.className = 'bg-white p-3 rounded-lg shadow-sm';
+            
+            const resultTitle = document.createElement('p');
+            resultTitle.className = 'text-xs text-slate-500 mb-2';
+            resultTitle.textContent = translations[currentLanguage].requiredMaterials;
+            
+            const powderText = document.createElement('p');
+            powderText.className = 'flex justify-between';
+            powderText.innerHTML = `<span class="font-medium">${translations[currentLanguage].powderAmount}:</span> <span id="tank${tankIndex}PowderAmount" class="text-green-700 font-medium">0 ${translations[currentLanguage].kg}</span>`;
+            
+            const bagsText = document.createElement('p');
+            bagsText.className = 'flex justify-between';
+            bagsText.innerHTML = `<span class="font-medium">${translations[currentLanguage].bagsCount}:</span> <span id="tank${tankIndex}BagsNeeded" class="text-green-700 font-medium">0 ${translations[currentLanguage].bag}</span>`;
+            
+            const waterText = document.createElement('p');
+            waterText.className = 'flex justify-between';
+            waterText.innerHTML = `<span class="font-medium">${translations[currentLanguage].waterAmount}:</span> <span id="tank${tankIndex}WaterNeeded" class="text-green-700 font-medium">0 ${translations[currentLanguage].liter}</span>`;
+            
+            calculatorContent.appendChild(resultTitle);
+            calculatorContent.appendChild(powderText);
+            calculatorContent.appendChild(bagsText);
+            calculatorContent.appendChild(waterText);
+            
+            calculatorContainer.appendChild(calculatorTitle);
+            calculatorContainer.appendChild(calculatorContent);
+            
+            return calculatorContainer;
+        }
+
+        function updateTank(tankIndex) {
+            const chemical = chemicals[currentChemical];
+            const tank = chemical.tanks[tankIndex];
+            const fillPercentage = parseInt(document.getElementById(`tank${tankIndex}Range`).value);
+            
+            // Update tank visual
+            document.getElementById(`tank${tankIndex}Fill`).style.height = `${fillPercentage}%`;
+            document.getElementById(`tank${tankIndex}Label`).textContent = `${fillPercentage}%`;
+            document.getElementById(`tank${tankIndex}Value`).textContent = `${fillPercentage}%`;
+            
+            // Calculate values
+            const currentCubicMeter = (fillPercentage / 100) * tank.capacity;
+            const currentTon = currentCubicMeter * (tank.density / 1000) * (tank.concentration / 100);
+            
+            // Calculate needed to reach 90%
+            const neededPercentage = Math.max(0, 90 - fillPercentage);
+            const neededCubicMeter = (neededPercentage / 100) * tank.capacity;
+            const neededTon = neededCubicMeter * (tank.density / 1000) * (tank.concentration / 100);
+            
+            // Update calculation displays
+            document.getElementById(`tank${tankIndex}CubicMeter`).textContent = currentCubicMeter.toFixed(2);
+            document.getElementById(`tank${tankIndex}Ton`).textContent = currentTon.toFixed(2);
+            document.getElementById(`tank${tankIndex}NeededCubicMeter`).textContent = neededCubicMeter.toFixed(2);
+            document.getElementById(`tank${tankIndex}NeededTon`).textContent = neededTon.toFixed(2);
+        }
+
+        function updateSMBSCalculator(tankIndex) {
+            const chemical = chemicals['SMBS'];
+            const tank = chemical.tanks[tankIndex];
+            const fillPercentage = parseInt(document.getElementById(`tank${tankIndex}Range`).value);
+            
+            // Calculate needed to reach 90%
+            const neededPercentage = Math.max(0, 90 - fillPercentage);
+            const neededCubicMeter = (neededPercentage / 100) * tank.capacity;
+            
+            // For SMBS, we need to calculate powder and water
+            const targetConcentration = tank.targetConcentration || 40; // Default to 40% if not specified
+            const powderAmount = neededCubicMeter * (targetConcentration / 100) * 1000; // in kg
+            const bagsNeeded = Math.ceil(powderAmount / chemical.bagWeight);
+            const waterNeeded = (neededCubicMeter * 1000) - powderAmount; // in liters
+            
+            // Update calculator displays
+            document.getElementById(`tank${tankIndex}PowderAmount`).textContent = `${powderAmount.toFixed(1)} ${translations[currentLanguage].kg}`;
+            document.getElementById(`tank${tankIndex}BagsNeeded`).textContent = `${bagsNeeded} ${translations[currentLanguage].bag}`;
+            document.getElementById(`tank${tankIndex}WaterNeeded`).textContent = `${waterNeeded.toFixed(1)} ${translations[currentLanguage].liter}`;
+        }
+
+        function openPasswordModal() {
+            document.getElementById('passwordModal').classList.remove('hidden');
+            document.getElementById('adminPasswordInput').value = '';
+            document.getElementById('passwordError').classList.add('hidden');
+            
+            // Focus on password input after a short delay (for mobile)
+            setTimeout(() => {
+                document.getElementById('adminPasswordInput').focus();
+            }, 300);
+            
+            // Add modal animation
+            const modal = document.querySelector('#passwordModal .modal');
+            modal.classList.add('modal-enter');
+            setTimeout(() => {
+                modal.classList.remove('modal-enter');
+                modal.classList.add('modal-enter-active');
+            }, 10);
+        }
+
+        function closePasswordModal() {
+            const modal = document.querySelector('#passwordModal .modal');
+            modal.classList.remove('modal-enter-active');
+            modal.classList.add('modal-enter');
+            
+            setTimeout(() => {
+                document.getElementById('passwordModal').classList.add('hidden');
+            }, 300);
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('adminPasswordInput').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                closePasswordModal();
+                openSettingsModal();
+            } else {
+                document.getElementById('passwordError').classList.remove('hidden');
+                // Shake animation for wrong password
+                const modal = document.querySelector('#passwordModal .modal');
+                modal.classList.add('animate-shake');
+                setTimeout(() => {
+                    modal.classList.remove('animate-shake');
+                }, 500);
+            }
+        }
+
+        function openSettingsModal() {
+            document.getElementById('settingsModal').classList.remove('hidden');
+            
+            // Add modal animation
+            const modal = document.querySelector('#settingsModal .modal');
+            modal.classList.add('modal-enter');
+            setTimeout(() => {
+                modal.classList.remove('modal-enter');
+                modal.classList.add('modal-enter-active');
+            }, 10);
+        }
+
+        function closeSettingsModal() {
+            const modal = document.querySelector('#settingsModal .modal');
+            modal.classList.remove('modal-enter-active');
+            modal.classList.add('modal-enter');
+            
+            setTimeout(() => {
+                document.getElementById('settingsModal').classList.add('hidden');
+            }, 300);
+        }
+
+        function updateSettingsForm() {
+            const chemicalId = document.getElementById('chemicalSelect').value;
+            
+            if (!chemicalId) {
+                document.getElementById('tankCapacity').value = '';
+                document.getElementById('materialConcentration').value = '';
+                document.getElementById('materialDensity').value = '';
+                return;
+            }
+            
+            const chemical = chemicals[chemicalId];
+            const tank = chemical.tanks[0]; // Use first tank as reference
+            
+            document.getElementById('tankCapacity').value = tank.capacity;
+            document.getElementById('materialConcentration').value = tank.concentration;
+            document.getElementById('materialDensity').value = tank.density;
+        }
+
+        function saveSettingsFromModal() {
+            const chemicalId = document.getElementById('chemicalSelect').value;
+            const capacity = parseFloat(document.getElementById('tankCapacity').value);
+            const concentration = parseFloat(document.getElementById('materialConcentration').value);
+            const density = parseFloat(document.getElementById('materialDensity').value);
+            
+            // Validate inputs
+            if (!chemicalId) {
+                showToast(translations[currentLanguage].selectChemical, 'error');
+                return;
+            }
+            
+            if (isNaN(capacity) || capacity <= 0) {
+                showToast(translations[currentLanguage].invalidCapacity, 'error');
+                return;
+            }
+            
+            if (isNaN(concentration) || concentration <= 0 || concentration > 100) {
+                showToast(translations[currentLanguage].invalidConcentration, 'error');
+                return;
+            }
+            
+            if (isNaN(density) || density <= 0) {
+                showToast(translations[currentLanguage].invalidDensity, 'error');
+                return;
+            }
+            
+            // Update all tanks for the selected chemical
+            const chemical = chemicals[chemicalId];
+            const tankCount = chemical.tankCount;
+            
+            for (let i = 0; i < tankCount; i++) {
+                chemical.tanks[i].capacity = capacity;
+                chemical.tanks[i].concentration = concentration;
+                chemical.tanks[i].density = density;
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('chemicals', JSON.stringify(chemicals));
+            
+            // If the current chemical is being displayed, update the calculations
+            if (currentChemical === chemicalId) {
+                for (let i = 0; i < tankCount; i++) {
+                    updateTank(i);
+                    if (chemicalId === 'SMBS') {
+                        updateSMBSCalculator(i);
+                    }
+                }
+            }
+            
+            showToast(translations[currentLanguage].settingsSaved, 'success');
+            closeSettingsModal();
+        }
+
+        function saveTankLevels() {
+            if (!currentChemical) return;
+            
+            const chemical = chemicals[currentChemical];
+            const tankCount = chemical.tankCount;
+            
+            // Initialize tank levels for this chemical if not exists
+            if (!tankLevels[currentChemical]) {
+                tankLevels[currentChemical] = [];
+            }
+            
+            // Update tank levels
+            for (let i = 0; i < tankCount; i++) {
+                const fillPercentage = parseInt(document.getElementById(`tank${i}Range`).value);
+                
+                // Ensure array has enough elements
+                while (tankLevels[currentChemical].length <= i) {
+                    tankLevels[currentChemical].push(0);
+                }
+                
+                tankLevels[currentChemical][i] = fillPercentage;
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('tankLevels', JSON.stringify(tankLevels));
+        }
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+            applyLanguage(currentLanguage);
+            updateLanguageButton();
+            updateInputPlaceholders();
+            
+            // Save language preference to localStorage
+            localStorage.setItem('tankManagementLanguage', currentLanguage);
+            
+            // If a chemical is currently displayed, update its display
+            if (currentChemical) {
+                displayChemicalTanks(currentChemical);
+            }
+        }
+
+        function applyLanguage(lang) {
+            document.getElementById('htmlRoot').dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.body.className = lang === 'ar' ? 'bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen font-arabic' : 'bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen font-english';
+            
+            // Update all elements with data-lang attributes
+            document.querySelectorAll('[data-lang-ar]').forEach(el => {
+                el.textContent = lang === 'ar' ? el.getAttribute('data-lang-ar') : el.getAttribute('data-lang-en');
+            });
+        }
+
+        function updateLanguageButton() {
+            const langButton = document.getElementById('languageToggle');
+            langButton.textContent = currentLanguage === 'ar' ? 'English' : 'العربية';
+        }
+
+        function updateInputPlaceholders() {
+            document.querySelectorAll('[data-lang-ar-placeholder]').forEach(el => {
+                el.placeholder = currentLanguage === 'ar' ? 
+                    el.getAttribute('data-lang-ar-placeholder') : 
+                    el.getAttribute('data-lang-en-placeholder');
+            });
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            
+            // Show toast
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'956f6670478578aa',t:'MTc1MTEzNjk0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
